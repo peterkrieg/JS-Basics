@@ -46,9 +46,10 @@ inner("435-215-9248");
   */
 
   function makeCounter(){
-    var num = 1;
+    var num = 0;
     return function(){
-      return num++;
+      num++;
+      return num;
     };
   }
 
