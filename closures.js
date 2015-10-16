@@ -13,7 +13,7 @@ var inner = outer();
 
 //Once you do that, invoke inner.
 
-  inner();
+inner();
 
 
 
@@ -43,19 +43,20 @@ inner("435-215-9248");
 
 /*
   Write a function called makeCounter that makes the following code work properly.
-*/
+  */
 
-function makeCounter(){
-  return function(num){
-    return num;
-  };
-}
+  function makeCounter(){
+    var num = 1;
+    return function(){
+      return num++;
+    };
+  }
 
   var count = makeCounter();
-  count(1); // 1
-  count(2); // 2
-  count(3); // 3
-  count(4); // 4
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -68,20 +69,20 @@ function makeCounter(){
   Write a second function that accepts the first function as its first parameter. 
   The second function should return a new third function which, when invoked, invokes the first, 
   original function that was passed in, but will only ever do so once.
-*/
+  */
 
-function shout(){
-  alert('I\'m shouting!!');
-}
-function jump(){
-  alert("Jumping!!!");
-}
-function second(shoutParam){
-  var third = function(){
-    shout();
-  };
-  return third();
-}
+  function shout(){
+    alert('I\'m shouting!!');
+  }
+  function jump(){
+    alert("Jumping!!!");
+  }
+  function second(shoutParam){
+    var third = function(){
+      shout();
+    };
+    return third();
+  }
 
 
 
@@ -95,38 +96,34 @@ function second(shoutParam){
   The first parameter will be an anonymous function and the second parameter, 'N', will be a number. 
   Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. 
   After it's been invoked 'N' number of times, return 'STOP'.
-*/
+  */
 
-function func(){
-  console.log('this is function running!!');
-}
-function fnCounter(funcParam, N){
-  for(var i=0; i<N; i++){
-    funcParam();
+  function func(){
+    console.log('this is function running!!');
   }
-  return 'STOP';
-}
+  function fnCounter(funcParam, N){
+    for(var i=0; i<N; i++){
+      funcParam();
+    }
+    return 'STOP';
+  }
 
 
 
 //Next Problem
 
+// Original function 
+
+  var counter = function(){
+    for (var i=1; i<=5; i++) {
+      setTimeout( function timer(){
+          console.log( i );
+      }, i*1000, i);
+    }
+  };
 
 
- 
-  // var counter = function(){
-  //   for (var i=1; i<=5; i++) {
-  //     setTimeout( function timer(){
-  //         console.log(i);
-  //     }, i*1000 );
-  //   }
-  // };
 
-  // function f(){
-  //   alert('what');
-  //   return;
-  // }
-  // setTimeout(f, 2000);
 
 
 
@@ -149,9 +146,24 @@ function fnCounter(funcParam, N){
 
 
   Fix the counter function so that it works the way you expect it to work. (logging 1 then 2 then 3, etc)
-*/
+  */
 
-    //Code Here
+
+  // Stuff I did, made it accept parameter to count whatever time you want
+
+
+  function timer(currentSec){
+    setTimeout(function(){
+      console.log(currentSec);
+    }, currentSec*1000);
+    return setTimeout;
+  }
+
+  var counter = function(seconds){
+    for(var i=1; i<=seconds; i++){
+      timer(i);
+    }
+  };
 
 
 
@@ -166,12 +178,12 @@ function fnCounter(funcParam, N){
 
 
   var funcArray = [
-    function(){return 0;},
-    function(){return 1;}, 
-    function(){return 2;},
-    function(){return 3;},
-    function(){return 4;},
-    function(){return 5;},
+  function(){return 0;},
+  function(){return 1;}, 
+  function(){return 2;},
+  function(){return 3;},
+  function(){return 4;},
+  function(){return 5;},
   ];
 
   funcArray[0]();
@@ -183,6 +195,6 @@ function fnCounter(funcParam, N){
 
 /*
   *Hint: Don't let this fool you. Break down what's really happening here.
-*/
+  */
 
 
