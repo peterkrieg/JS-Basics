@@ -4,16 +4,16 @@ var outer = function(){
   var name = 'Tyler';
   return function(){
     return 'The original name was ' + name;
-  }
-}
+  };
+};
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+var inner = outer();
 
 //Once you do that, invoke inner.
 
-  //Code Here
+  inner();
 
 
 
@@ -32,7 +32,8 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+var inner = callFriend();
+inner("435-215-9248");
 
 
 
@@ -44,60 +45,107 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-  //Code Here
-  var count = makeCounter();
-  count() // 1
-  count() // 2
-  count() // 3
-  count() // 4
-
-
-
-//Next Problem
-
-
-
-/*
-  Write a function that does something simple (console, alert, etc). Write a second function that accepts the first function as it's first parameter. The second function should return a new third function which, when invoked, invokes the first, original function that was passed in, but will only ever do so once.
-*/
-
-  //Code Here
-
-
-
-//Next Problem
-
-
-
-/*
-  Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter will be an anonymous function and the second parameter, 'N', will be a number. Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
-*/
-
-
-
-//Next Problem
-
-
-
-/*
-  var counter = function(){
-    for (var i=1; i<=5; i++) {
-      setTimeout( function timer(){
-          console.log( i );
-      }, i*1000 );
-    }
+function makeCounter(){
+  return function(num){
+    return num;
   };
+}
 
-  Above you have a function named counter. Examine the function (without running the code) then below write what you expect to happen when the funciton is invoked. *Hint: setTimeout calls a function or evaluates an expression after a specified number of milliseconds.
+  var count = makeCounter();
+  count(1); // 1
+  count(2); // 2
+  count(3); // 3
+  count(4); // 4
 
-    //Answer Here
+
+
+//Next Problem
+
+
+
+/*
+  Write a function that does something simple (console, alert, etc). 
+  Write a second function that accepts the first function as its first parameter. 
+  The second function should return a new third function which, when invoked, invokes the first, 
+  original function that was passed in, but will only ever do so once.
+*/
+
+function shout(){
+  alert('I\'m shouting!!');
+}
+function jump(){
+  alert("Jumping!!!");
+}
+function second(shoutParam){
+  var third = function(){
+    shout();
+  };
+  return third();
+}
+
+
+
+
+//Next Problem
+
+
+
+/*
+  Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. 
+  The first parameter will be an anonymous function and the second parameter, 'N', will be a number. 
+  Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. 
+  After it's been invoked 'N' number of times, return 'STOP'.
+*/
+
+function func(){
+  console.log('this is function running!!');
+}
+function fnCounter(funcParam, N){
+  for(var i=0; i<N; i++){
+    funcParam();
+  }
+  return 'STOP';
+}
+
+
+
+//Next Problem
+
+
+
+ 
+  // var counter = function(){
+  //   for (var i=1; i<=5; i++) {
+  //     setTimeout( function timer(){
+  //         console.log(i);
+  //     }, i*1000 );
+  //   }
+  // };
+
+  // function f(){
+  //   alert('what');
+  //   return;
+  // }
+  // setTimeout(f, 2000);
+
+
+
+  /*
+
+  Above you have a function named counter. Examine the function (without running the code) 
+  then below write what you expect to happen when the funciton is invoked. 
+  *Hint: setTimeout calls a function or evaluates an expression after a specified number of milliseconds.
+
+    //  The counter function currently counts from 1 to 5, timed perfectly.  The setTimeout window (global)
+    method delays the timer() function 1 s (1000 ms), so when invoking the function the first number of i 
+    will be 1 second delayed
 
 
   Now, run the function in your console and note what happpens.
 
   Was your answer right or wrong?
 
-    //Answer Here
+    //   My answer was very wrong.. :(    
 
 
   Fix the counter function so that it works the way you expect it to work. (logging 1 then 2 then 3, etc)
@@ -114,13 +162,26 @@ var callFriend = function(){
 /*
   Make the following code work
 
-  funcArray[0]() //0
-  funcArray[1]() //1
-  funcArray[2]() //2
-  funcArray[3]() //3
-  funcArray[4]() //4
-  funcArray[5]() //5
+  */
 
+
+  var funcArray = [
+    function(){return 0;},
+    function(){return 1;}, 
+    function(){return 2;},
+    function(){return 3;},
+    function(){return 4;},
+    function(){return 5;},
+  ];
+
+  funcArray[0]();
+  funcArray[1]();
+  funcArray[2]();
+  funcArray[3]();
+  funcArray[4]();
+  funcArray[5]();
+
+/*
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
 
