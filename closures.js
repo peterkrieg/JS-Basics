@@ -99,15 +99,16 @@ inner("435-215-9248");
   After it's been invoked 'N' number of times, return 'STOP'.
   */
 
-  function func(){
-    console.log('this is function running!!');
-  }
+
   function fnCounter(funcParam, N){
     for(var i=0; i<N; i++){
       funcParam();
     }
     return 'STOP';
   }
+
+  fnCounter(function(){console.log('function is running');}, 5);
+  // above line will print "function is running" to console 5 times, test experiment
 
 
 
